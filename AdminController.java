@@ -1,4 +1,4 @@
-package SeatingArrangement;
+package seatingRepo;
 
 import java.util.Scanner;
 
@@ -11,14 +11,15 @@ public class AdminController {
         String password=sc.nextLine();
         admin.register(password);
     }
-    public static void login(){
+    public static boolean login(){
         System.out.println("Enter your Password");
         String password=sc.nextLine();
         if(admin.login(password)){
             System.out.println("Log In Successful");
+            return true;
         }else{
-            System.out.println("Try Again");
-            login();
+            System.out.println("Wrong Password");
+            return false;
         }
     }
 }

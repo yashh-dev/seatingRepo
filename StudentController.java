@@ -1,18 +1,19 @@
-package SeatingArrangement;
+package seatingRepo;
 
 import java.time.Year;
-import java.util.ArrayList;
-import java.util.Currency;
 import java.util.Scanner;
-import java.util.concurrent.Semaphore;
+import java.util.ArrayList;
 
 public class StudentController {
-    static ArrayList<Student> students;
+    
     boolean islogin;
     static Student currentUser;
     static Scanner sc = new Scanner(System.in);
     static Student student = new Student();
-    public static Student register(){
+    public StudentController(){
+
+    }
+    public static Student register(ArrayList<Student> students){
         System.out.println("Enter your Name");
         String Name = sc.nextLine();
         System.out.println("Enter new Password");
@@ -25,20 +26,26 @@ public class StudentController {
         System.out.println("Enter the  year");
         int year = sc.nextInt();
         sc.nextLine();
-        currentUser = new Student(Name,password,rollNumber,branch,year,["asdf"]);
+        currentUser = new Student(Name,password,rollNumber,branch,year);
+        students.add(currentUser);
         return currentUser;
     }
-    public static Student login(){
+    public static Student login(ArrayList<Student> students){
         System.out.println("name");
         String Name = sc.nextLine();
         System.out.println("Enter your Password");
-        String password=sc.nextLine();
+        String pwd = sc.nextLine();
         for (Student student : students) {
-            if (student.getName() == Name) {
-                return student.authentication(password);
+            if (student.getName().equalsIgnoreCase(Name)) {
+                System.out.println("Logged in");
+                return student;
+               
             }
         }
         System.out.println("Student Not Found");
-        return null;
+        return currentUser;
+    }
+    public void addStudents(Student student){
+        this.students.add(student);
     }
 }

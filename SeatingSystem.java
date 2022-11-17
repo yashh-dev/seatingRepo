@@ -1,4 +1,4 @@
-package SeatingArrangement;
+package seatingRepo;
 public class SeatingSystem {
     
     

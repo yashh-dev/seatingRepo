@@ -1,17 +1,21 @@
-package SeatingArrangement;
+package seatingRepo;
 import java.util.Scanner;
-
+import java.util.ArrayList;
 public class Main {
     private static Scanner sc=new Scanner(System.in);
+    public static StudentController studentController = new StudentController();
+    static ArrayList<Student> students = new ArrayList<Student>();
     public static void main(String[] args) {
-
+        
+        students.add(new Student("yash","yash",1,"cs",2018));
         System.out.println("----------------------------------");
         System.out.println("Welcome Seating Arrangement System");
         System.out.println("----------------------------------");
-        LoginInstructions();
+        getStudents();
         int choice=0;
         boolean quit=false;
         while (!quit) {
+            LoginInstructions();
             choice=sc.nextInt();
             sc.nextLine();
             switch (choice){
@@ -20,11 +24,13 @@ public class Main {
                 case 2:quit=true;
                     System.out.println("Bye");break;
                 case 3:LoginInstructions();
+                case 4:getStudents();
             }
         }
     }
 
     private static void studentForm() {
+        System.out.println("Student Login");
         Student user;
         int choice=0;
         boolean quit=false;
@@ -33,11 +39,15 @@ public class Main {
             choice=sc.nextInt();
             sc.nextLine();
             switch (choice){
-                case 0:user = StudentController.register();
-                       studentPage(user);   
+                case 0:user = StudentController.register(students);
+                       studentPage(user);
+                       quit=true;
                        break;
-                case 1:user = StudentController.login();
-                       studentPage(user); 
+                case 1:user = StudentController.login(students);
+                        if(user!=null){
+                            studentPage(user); 
+                        }                       
+                       quit=true;
                        break;
                 case 2:quit=true;break; 
              
@@ -68,6 +78,7 @@ public class Main {
     }
 
     private static void adminForm() {
+        System.out.println("Admin Login");
         int choice=0;
         boolean quit=false;
         FormInstructions();
@@ -77,9 +88,12 @@ public class Main {
             switch (choice){
                 case 0:AdminController.register();
                         adminPage();
+                        quit=true;
                         break;
-                case 1:AdminController.login();
-                        adminPage();
+                case 1:if(AdminController.login()){
+                    adminPage();
+                };
+                        quit=true;
                         break;
                 case 2:quit=true;break;
                 case 3:FormInstructions();
@@ -88,6 +102,22 @@ public class Main {
     }
 
     private static void adminPage() {
+        int choice=0;
+        boolean quit=false;
+        AdminInstructions();
+        while (!quit) {
+            choice=sc.nextInt();
+            sc.nextLine();
+            switch (choice){
+                case 0:AdminInstructions();break;
+                case 1:;break;
+                case 2:;break;
+                case 3:break;
+                case 4:quit=true;
+                    System.out.println("Logged out");    
+                break;
+            }
+        }
     }
 
     private static void FormInstructions() {
@@ -112,5 +142,17 @@ public class Main {
         System.out.println("3 to Get your SeatArrangement");
         System.out.println("4 to Logout");
     }
-    
+    public static void AdminInstructions(){
+        System.out.println("Press :");
+        System.out.println("0 to Print Instruction");
+        System.out.println("1 to Get Student Details");
+        System.out.println("2 Get your Subjects");
+        System.out.println("3 to Get your SeatArrangement");
+        System.out.println("4 to Logout");
+    }
+    public static void getStudents(){
+        for (Student student : students) {
+            System.out.println(student.getName());
+        }
+    }   
 }
