@@ -1,6 +1,6 @@
 package seatingRepo;
 
-import java.util.Scanner;
+import java.util.*;
 
 public class AdminController {
     boolean islogin;
@@ -21,5 +21,20 @@ public class AdminController {
             System.out.println("Wrong Password");
             return false;
         }
+    }
+    public static void getStudentDetails(ArrayList<Student> students){
+        for (Student student : students) {
+            System.out.println("-----------------");
+            student.getDetails();
+        }
+    }
+    public static void createSeatingArrangement(ArrayList<Student> students){
+        System.out.println("To create Seating Arrangement");
+        System.out.println("Enter subject");
+        String sub = sc.nextLine();
+        System.out.println("ENter Number of Seats");
+        int seat = sc.nextInt();
+        sc.nextLine();
+        SeatingSystem.getSeating(students,sub,seat);
     }
 }

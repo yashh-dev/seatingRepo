@@ -1,6 +1,5 @@
 package seatingRepo;
 
-import java.time.Year;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -45,7 +44,5 @@ public class StudentController {
         System.out.println("Student Not Found");
         return currentUser;
     }
-    public void addStudents(Student student){
-        this.students.add(student);
-    }
+   
 }

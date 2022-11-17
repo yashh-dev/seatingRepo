@@ -1,6 +1,5 @@
 package seatingRepo;
-import java.util.Scanner;
-import java.util.ArrayList;
+import java.util.*;
 public class Main {
     private static Scanner sc=new Scanner(System.in);
     public static StudentController studentController = new StudentController();
@@ -8,6 +7,9 @@ public class Main {
     public static void main(String[] args) {
         
         students.add(new Student("yash","yash",1,"cs",2018));
+        students.add(new Student("aak","yash",2,"cs",2018));
+        students.add(new Student("sanj","yash",3,"bio",2018));
+        students.add(new Student("asan","yash",4,"bio",2018));
         System.out.println("----------------------------------");
         System.out.println("Welcome Seating Arrangement System");
         System.out.println("----------------------------------");
@@ -69,7 +71,7 @@ public class Main {
                 case 0:StudentInstructions();break;
                 case 1:user.getDetails();break;
                 case 2:user.getSubjects();break;
-                case 3:break;
+                case 3:SeatingSystem.getSeating(user);break;
                 case 4:quit=true;
                     System.out.println("Logged out");    
                 break;
@@ -110,10 +112,9 @@ public class Main {
             sc.nextLine();
             switch (choice){
                 case 0:AdminInstructions();break;
-                case 1:;break;
-                case 2:;break;
-                case 3:break;
-                case 4:quit=true;
+                case 1:AdminController.getStudentDetails(students);break;
+                case 2:AdminController.createSeatingArrangement(students);break;
+                case 3:quit=true;
                     System.out.println("Logged out");    
                 break;
             }
@@ -146,9 +147,8 @@ public class Main {
         System.out.println("Press :");
         System.out.println("0 to Print Instruction");
         System.out.println("1 to Get Student Details");
-        System.out.println("2 Get your Subjects");
-        System.out.println("3 to Get your SeatArrangement");
-        System.out.println("4 to Logout");
+        System.out.println("2 to Create SeatArrangement");
+        System.out.println("3 to Logout");
     }
     public static void getStudents(){
         for (Student student : students) {

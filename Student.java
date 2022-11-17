@@ -1,6 +1,5 @@
 package seatingRepo;
 
-import java.util.ArrayList;
 
 public class Student {
     private String Name;
